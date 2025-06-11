@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Processos Concluídos e em Andamento - 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        .title-violet {
+            color: #8b5cf6; /* Cor violeta */
+            font-weight: 700;
+        }
+        .title-lilac {
+            color: #a78bfa; /* Cor lilás mais escura para contraste */
+            font-weight: 700;
+        }
+        .footer-text {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236B7280%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 0.7rem top 50%;
+            background-size: 0.65rem auto;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+    <div class="max-w-7xl mx-auto">
+
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Painel Processos Concluídos e em Andamento - 2025</h1>
+            <p class="mt-2 text-md text-gray-600">
+                Uma análise didática dos dados de processos da SEDUR, extraídos do SIS-SEDUR em 10 de Junho de 2025.
+            </p>
+        </header>
+
+        <!-- Seção de Análise Geral -->
+        <section class="mb-12">
+            <h2 class="text-2xl title-violet mb-6">1. Análise Geral do Desempenho</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card text-center">
+                    <h3 class="text-lg font-semibold text-gray-700">Total de Processos</h3>
+                    <p class="text-4xl font-bold text-gray-900 mt-2">3.782</p>
+                    <p class="text-sm text-gray-500 mt-2">Esta é a demanda total de trabalho da secretaria no primeiro semestre.</p>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Distribuição Geral</h3>
+                     <div class="flex justify-around items-center">
+                        <div>
+                            <p class="text-sm text-gray-500">Em Andamento</p>
+                            <p class="text-2xl font-bold text-amber-600">2.813 <span class="text-lg font-normal text-gray-600">(74,4%)</span></p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Concluídos</p>
+                            <p class="text-2xl font-bold text-green-600">969 <span class="text-lg font-normal text-gray-600">(25,6%)</span></p>
+                        </div>
+                    </div>
+                     <p class="text-sm text-gray-500 mt-3">A proporção entre o trabalho pendente e o já finalizado.</p>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-lg font-semibold text-gray-700">Evolução da Produtividade</h3>
+                     <p class="text-lg text-gray-600 mt-2">1º Tri: 474 vs 2º Tri: 495</p>
+                    <p class="text-4xl font-bold text-green-500 mt-1">+4,4%</p>
+                     <p class="text-sm text-gray-500 mt-2">Houve um crescimento na capacidade de conclusão de processos.</p>
+                </div>
+            </div>
+            <footer class="footer-text">Infográfico elaborado pela Coordenadoria de Planejamento e Projetos – (CPP) / Diretoria de Urbanismo (DIRURB) / SEDUR (PMC)</footer>
+        </section>
+
+        <!-- Seção de Desempenho por Setor -->
+        <section class="mb-12">
+            <h2 class="text-2xl title-lilac mb-4">2. Desempenho por Setor</h2>
+            <p class="text-gray-600 mb-6">Esta seção compara a carga de trabalho e a eficiência de cada departamento da SEDUR, permitindo identificar os setores mais demandados e os mais produtivos.</p>
+            <div class="card overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="p-4 font-semibold text-gray-600">Setor</th>
+                            <th class="p-4 font-semibold text-gray-600 text-center">Volume de Processos (% Total)</th>
+                            <th class="p-4 font-semibold text-gray-600 text-center">Taxa de Conclusão</th>
+                            <th class="p-4 font-semibold text-gray-600 text-center">Variação de Produtividade</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <!-- Dados da Tabela -->
+                        <tr><td class="p-4 font-medium">CLU (Lic. Urbanístico)</td><td class="p-4 text-center">1.847 (48,8%)</td><td class="p-4 text-center">24,7%</td><td class="p-4 text-center font-bold text-green-600">+35,6%</td></tr>
+                        <tr class="bg-red-50"><td class="p-4 font-medium text-red-800">SUOFIS (Fiscalização)</td><td class="p-4 text-center text-red-800">966 (25,5%)</td><td class="p-4 text-center text-red-800">0,1%</td><td class="p-4 text-center font-bold text-red-600">-100%</td></tr>
+                        <tr><td class="p-4 font-medium">CLA (Lic. Ambiental)</td><td class="p-4 text-center">635 (16,8%)</td><td class="p-4 text-center">18,4%</td><td class="p-4 text-center font-bold text-green-600">+29,4%</td></tr>
+                        <tr><td class="p-4 font-medium">GELAP (Lic. Atividades)</td><td class="p-4 text-center">348 (9,2%)</td><td class="p-4 text-center">35,6%</td><td class="p-4 text-center font-bold text-green-600">+18,2%</td></tr>
+                        <tr><td class="p-4 font-medium">CPP (Planej. e Projetos)</td><td class="p-4 text-center">133 (3,5%)</td><td class="p-4 text-center">58,6%</td><td class="p-4 text-center font-bold text-green-600">+29,4%</td></tr>
+                        <tr><td class="p-4 font-medium">CIM (Info. Municipais)</td><td class="p-4 text-center">117 (3,1%)</td><td class="p-4 text-center">45,3%</td><td class="p-4 text-center font-bold text-gray-500">0%</td></tr>
+                        <tr><td class="p-4 font-medium">CPA (Planej. Ambiental)</td><td class="p-4 text-center">76 (2,0%)</td><td class="p-4 text-center">52,6%</td><td class="p-4 text-center font-bold text-gray-500">0%</td></tr>
+                        <tr><td class="p-4 font-medium">COGEFIN (Gestão Fin.)</td><td class="p-4 text-center">6 (0,2%)</td><td class="p-4 text-center">0%</td><td class="p-4 text-center font-bold text-gray-500">0%</td></tr>
+                        <tr><td class="p-4 font-medium">SEHAB (Habitação)</td><td class="p-4 text-center">5 (0,1%)</td><td class="p-4 text-center">0%</td><td class="p-4 text-center font-bold text-gray-500">0%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <footer class="footer-text">Infográfico elaborado pela Coordenadoria de Planejamento e Projetos – (CPP) / Diretoria de Urbanismo (DIRURB) / SEDUR (PMC)</footer>
+        </section>
+
+        <!-- Seção Interativa por Assunto -->
+        <section class="mb-12">
+            <h2 class="text-2xl title-violet mb-4">3. Análise Detalhada por Assunto</h2>
+            <p class="text-gray-600 mb-6">Esta ferramenta interativa permite um mergulho profundo no desempenho de cada um dos 75 tipos de processos. Selecione um assunto na lista para obter um diagnóstico completo.</p>
+            <div class="card">
+                <div class="mb-6">
+                    <label for="assunto-select" class="block mb-2 font-medium text-gray-700">Escolha o Assunto para Análise:</label>
+                    <select id="assunto-select" class="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition">
+                    </select>
+                </div>
+
+                <div id="initial-message" class="text-center text-gray-500 py-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    <p class="mt-4 font-medium">Aguardando seleção...</p>
+                    <p class="text-sm">Por favor, selecione um assunto na lista acima para ver os detalhes.</p>
+                </div>
+
+                <div id="assunto-detalhes-wrapper" class="hidden">
+                    <h3 class="text-xl font-bold title-lilac mb-6" id="assunto-titulo"></h3>
+                    <div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
+                        <!-- Coluna de Métricas -->
+                        <div class="space-y-6">
+                            <div>
+                                <p class="font-semibold text-gray-700">Volume de Processos</p>
+                                <p class="text-sm text-gray-500 mb-1">Representa a demanda total para este assunto no período.</p>
+                                <p class="text-4xl font-bold text-gray-800" id="detalhe-volume"></p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Taxa de Conclusão</p>
+                                <p class="text-sm text-gray-500 mb-1">O percentual de processos que foram finalizados com sucesso.</p>
+                                <p class="text-4xl font-bold text-violet-600" id="detalhe-taxa"></p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Variação de Produtividade (Global)</p>
+                                <p class="text-sm text-gray-500 mb-1">A mudança na capacidade de conclusão entre o 1º e o 2º tri.</p>
+                                <div id="detalhe-crescimento"></div>
+                            </div>
+                        </div>
+                        <!-- Coluna de Gráficos e Diagnóstico -->
+                        <div class="space-y-6">
+                            <div>
+                                <p class="font-semibold text-gray-700">Proporção Concluídos vs. Em Andamento</p>
+                                <p class="text-sm text-gray-500 mb-2">Visualização do status atual dos processos.</p>
+                                <div class="relative w-full h-40">
+                                    <canvas id="assunto-chart"></canvas>
+                                </div>
+                            </div>
+                            <div id="diagnostico" class="p-4 rounded-lg">
+                                <h4 class="font-bold mb-2 flex items-center" id="diagnostico-titulo"></h4>
+                                <p class="text-sm" id="diagnostico-texto"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nova Seção para Análise Trimestral -->
+                     <div class="mt-8 pt-6 border-t border-gray-200">
+                        <h4 class="text-lg font-semibold text-gray-700">Análise de Conclusões por Trimestre</h4>
+                        <p class="text-sm text-gray-500 mb-4">Compara o número de processos concluídos em cada trimestre para identificar tendências de produtividade.</p>
+                        <div class="relative w-full h-64">
+                             <canvas id="trimestre-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer-text">Infográfico elaborado pela Coordenadoria de Planejamento e Projetos – (CPP) / Diretoria de Urbanismo (DIRURB) / SEDUR (PMC)</footer>
+        </section>
+        
+         <!-- Seção de Créditos -->
+        <footer class="mt-12 pt-8 border-t border-gray-200 text-sm text-gray-700">
+            <h3 class="font-bold text-gray-800">REALIZAÇÃO:</h3>
+            <p>Fábio Moura Costa – Urbanista e Msc. em Geografia</p>
+            <p>Coordenadoria de Planejamento e Projetos (CPP)</p>
+            <p>Diretoria de Urbanismo (DIRURB)</p>
+            <p>Secretaria de Desenvolvimento Urbano e Meio Ambiente (SEDUR) / PMC</p>
+        </footer>
+    </div>
+
+    <script>
+        // Data structure includes quarterly performance for the new chart
+        const dadosAssuntos = {
+            "PROCESSO FISCAL": { total: 966, concluidos: 1, andamento: 965, crescimento: -100, tri1: 1, tri2: 0 },
+            "ALVARÁ DE HABITE-SE": { total: 377, concluidos: 160, andamento: 217, crescimento: 101.9, tri1: 53, tri2: 107 },
+            "LICENÇA PARA CONSTRUÇÃO DE EDIFICAÇÃO UNIRESIDENCIAL": { total: 359, concluidos: 164, andamento: 195, crescimento: -9.3, tri1: 86, tri2: 78 },
+            "TERMO DE RECONHECIMENTO DE EDIFICAÇÃO CONCLUÍDA - TREC": { total: 167, concluidos: 43, andamento: 124, crescimento: 38.9, tri1: 18, tri2: 25 },
+            "CONSULTA PRÉVIA": { total: 126, concluidos: 78, andamento: 48, crescimento: 29.4, tri1: 34, tri2: 44 },
+            "ATENDIMENTO/PRORROGAÇÃO/REVISÃO DE CONDICIONANTES": { total: 118, concluidos: 23, andamento: 95, crescimento: -56.3, tri1: 16, tri2: 7 },
+            "ALVARÁ DE HABITE-SE DE REGULARIZAÇÃO": { total: 111, concluidos: 24, andamento: 87, crescimento: 66.7, tri1: 9, tri2: 15 },
+            "LICENÇA PARA AMPLIAÇÃO E/OU REFORMA DO IMÓVEL": { total: 107, concluidos: 25, andamento: 82, crescimento: 112.5, tri1: 8, tri2: 17 },
+            "LICENÇA AMBIENTAL SIMPLIFICADA (LAS)": { total: 99, concluidos: 42, andamento: 57, crescimento: 47.1, tri1: 17, tri2: 25 },
+            "INEXIGIBILIDADE DE LICENCIAMENTO AMBIENTAL": { total: 97, concluidos: 28, andamento: 69, crescimento: 54.5, tri1: 11, tri2: 17 },
+            "LICENÇA PARA REALIZAÇÃO DE EVENTOS EM ÁREA PÚBLICA": { total: 89, concluidos: 3, andamento: 86, crescimento: -100, tri1: 3, tri2: 0 },
+            "RENOVAÇÃO DO ALVARÁ DE PUBLICIDADE": { total: 87, concluidos: 74, andamento: 13, crescimento: -19.5, tri1: 41, tri2: 33 },
+            "AUTORIZAÇÃO PARA PODA OU CORTE DE ÁRVORES": { total: 76, concluidos: 40, andamento: 36, crescimento: 0, tri1: 20, tri2: 20 },
+            "LICENÇA PARA DESMEMBRAMENTO/DESDOBRO": { total: 56, concluidos: 4, andamento: 52, crescimento: 200, tri1: 1, tri2: 3 },
+            "LICENÇA PARA CONSTRUÇÃO DE ESTABELECIMENTOS NÃO RESIDENCIAIS": { total: 51, concluidos: 6, andamento: 45, crescimento: -80, tri1: 5, tri2: 1 },
+            "LICENÇA PARA REALIZAÇÃO DE EVENTOS EM ÁREA PRIVADA": { total: 49, concluidos: 3, andamento: 46, crescimento: -50, tri1: 2, tri2: 1 },
+            "LICENÇA PARA CONSTRUÇÃO DE EDIFICAÇÃO PLURIRESIDENCIAL": { total: 46, concluidos: 3, andamento: 43, crescimento: 100, tri1: 1, tri2: 2 },
+            "LICENÇA PARA CONSTRUÇÃO DE EDIFICAÇÃO UNIRESIDENCIAL [Segunda Categoria]": { total: 44, concluidos: 43, andamento: 1, crescimento: -92.5, tri1: 40, tri2: 3 },
+            "OUTROS SERVIÇOS (CLA)": { total: 42, concluidos: 4, andamento: 38, crescimento: 0, tri1: 2, tri2: 2 },
+            "LICENÇA PARA TERRAPLANAGEM": { total: 39, concluidos: 20, andamento: 19, crescimento: -18.2, tri1: 11, tri2: 9 },
+            "RENOVAÇÃO DE LICENÇA AMBIENTAL (RLA)": { total: 37, concluidos: 7, andamento: 30, crescimento: 33.3, tri1: 3, tri2: 4 },
+            "LICENÇA PARA OBRAS DE INFRAESTRUTURA": { total: 36, concluidos: 5, andamento: 31, crescimento: -33.3, tri1: 3, tri2: 2 },
+            "DECLARAÇÃO DE ENDEREÇO DO IMÓVEL": { total: 36, concluidos: 34, andamento: 2, crescimento: 0, tri1: 17, tri2: 17 },
+            "LICENÇA PARA CONSTRUÇÃO DE MURO/GRADIL/CONTENÇÃO": { total: 34, concluidos: 1, andamento: 33, crescimento: Infinity, tri1: 0, tri2: 1 },
+            "AUTORIZAÇÃO PARA SUPRESSÃO DE VEGETAÇÃO (ASV)": { total: 31, concluidos: 2, andamento: 29, crescimento: 0, tri1: 1, tri2: 1 },
+            "LICENÇA PARA AMEMBRAMENTO": { total: 31, concluidos: 5, andamento: 26, crescimento: -75, tri1: 4, tri2: 1 },
+            "OUTROS SERVIÇOS (CLU)": { total: 29, concluidos: 1, andamento: 28, crescimento: -100, tri1: 1, tri2: 0 },
+            "LICENÇA PARA DEMOLIÇÃO": { total: 28, concluidos: 16, andamento: 12, crescimento: 66.7, tri1: 6, tri2: 10 },
+            "MODIFICAÇÃO DO PROJETO": { total: 26, concluidos: 11, andamento: 15, crescimento: 20, tri1: 5, tri2: 6 },
+            "LICENÇA PARA INSTALAÇÃO EQUIPAMENTO FIXO EM LOGRADOURO PÚBLICO": { total: 25, concluidos: 0, andamento: 25, crescimento: 0, tri1: 0, tri2: 0 },
+            "LICENÇA PARA REMEMBRAMENTO": { total: 24, concluidos: 9, andamento: 15, crescimento: -50, tri1: 6, tri2: 3 },
+            "RECONSIDERAÇÃO DE PARECER/PROCESSO (CLU - Segunda Categoria)": { total: 24, concluidos: 1, andamento: 23, crescimento: Infinity, tri1: 0, tri2: 1 },
+            "CERTIDÃO DE INFORMAÇÃO DE ÁREA": { total: 24, concluidos: 19, andamento: 5, crescimento: -53.8, tri1: 13, tri2: 6 },
+            "CERTIDÃO AMBIENTAL": { total: 22, concluidos: 10, andamento: 12, crescimento: 0, tri1: 5, tri2: 5 },
+            "RENOVAÇÃO DE LICENÇA PARA INSTALAÇÃO EQUIPAMENTO FIXO EM LOGRADOURO PÚBLICO": { total: 19, concluidos: 6, andamento: 13, crescimento: 100, tri1: 2, tri2: 4 },
+            "AUTORIZAÇÃO PARA IMPLANTAÇÃO DE OUTDOOR, PAINEL, TÓTEM E EMPENA": { total: 18, concluidos: 11, andamento: 7, crescimento: -16.7, tri1: 6, tri2: 5 },
+            "AUTORIZAÇÃO PARA IMPLANTAÇÃO DE LETREIRO, TOLDO, TAPUME, PROTETOR DE OBRAS E EQUIPAMENTOS AMBULANTES": { total: 16, concluidos: 11, andamento: 5, crescimento: -42.9, tri1: 7, tri2: 4 },
+            "RENOVAÇÃO DE LICENÇA DE CONSTRUÇÃO": { total: 15, concluidos: 2, andamento: 13, crescimento: Infinity, tri1: 0, tri2: 2 },
+            "TRANSFERÊNCIA OU CANCELAMENTO DE RESPONSÁVEL TÉCNICO": { total: 15, concluidos: 3, andamento: 12, crescimento: -50, tri1: 2, tri2: 1 },
+            "SOLICITAÇÃO DE CÓPIA DE PROCESSO TOTAL": { total: 13, concluidos: 0, andamento: 13, crescimento: 0, tri1: 0, tri2: 0 },
+            "ANÁLISE DE ORIENTAÇÃO PRÉVIA DE EMPREENDIMENTOS (AOP)": { total: 12, concluidos: 0, andamento: 12, crescimento: 0, tri1: 0, tri2: 0 },
+            "SOLICITAÇÃO DE CÓPIA DE PROCESSO PARCIAL": { total: 11, concluidos: 0, andamento: 11, crescimento: 0, tri1: 0, tri2: 0 },
+            "LICENÇA PARA FUNCIONAMENTO DE PARQUES DE DIVERSÕES E CIRCO": { total: 11, concluidos: 1, andamento: 10, crescimento: -100, tri1: 1, tri2: 0 },
+            "CERTIDÃO DE EDIFICAÇÃO": { total: 11, concluidos: 2, andamento: 9, crescimento: 0, tri1: 1, tri2: 1 },
+            "LICENÇA PARA REPAROS GERAIS": { total: 11, concluidos: 2, andamento: 9, crescimento: Infinity, tri1: 0, tri2: 2 },
+            "LICENÇA PARA REALIZAÇÃO DE EVENTOS REFERENTES A DIVULGAÇÃO COMERCIAL": { total: 10, concluidos: 0, andamento: 10, crescimento: 0, tri1: 0, tri2: 0 },
+            "CERTIDÃO DE DEMOLIÇÃO": { total: 8, concluidos: 5, andamento: 3, crescimento: 50, tri1: 2, tri2: 3 },
+            "LICENÇA PARA IMPLANTAÇÃO DE CONDOMÍNIO DE LOTES": { total: 8, concluidos: 1, andamento: 7, crescimento: -100, tri1: 1, tri2: 0 },
+            "LICENÇA PARA CONSTRUÇÃO DE URBANIZAÇÃO INTEGRADA/REURBANIZAÇÃO INTEGRADA": { total: 7, concluidos: 0, andamento: 7, crescimento: 0, tri1: 0, tri2: 0 },
+            "RECONSIDERAÇÃO DE PARECER/PROCESSO (CPP)": { total: 7, concluidos: 0, andamento: 7, crescimento: 0, tri1: 0, tri2: 0 },
+            "AUTORIZAÇÃO AMBIENTAL": { total: 6, concluidos: 1, andamento: 5, crescimento: -100, tri1: 1, tri2: 0 },
+            "ALTERAÇÃO DE TAC": { total: 6, concluidos: 0, andamento: 6, crescimento: 0, tri1: 0, tri2: 0 },
+            "RECONSIDERAÇÃO DE PARECER/PROCESSO (CLU - Primeira Categoria)": { total: 6, concluidos: 1, andamento: 5, crescimento: -100, tri1: 1, tri2: 0 },
+            "RECONSIDERAÇÃO DE PARECER/PROCESSO (COGEFIN)": { total: 6, concluidos: 0, andamento: 6, crescimento: 0, tri1: 0, tri2: 0 },
+            "CERTIDÃO NARRATIVA": { total: 5, concluidos: 0, andamento: 5, crescimento: 0, tri1: 0, tri2: 0 },
+            "LICENÇA PARA LOTEAMENTO/RELOTEAMENTO": { total: 4, concluidos: 0, andamento: 4, crescimento: 0, tri1: 0, tri2: 0 },
+            "LICENÇA AMBIENTAL DE ALTERAÇÃO (LAA)": { total: 4, concluidos: 0, andamento: 4, crescimento: 0, tri1: 0, tri2: 0 },
+            "AUTENTICAÇÃO DE PLANTAS": { total: 4, concluidos: 0, andamento: 4, crescimento: 0, tri1: 0, tri2: 0 },
+            "LICENÇA PARA IMPLANTAÇÃO DE TAPUME": { total: 4, concluidos: 0, andamento: 4, crescimento: 0, tri1: 0, tri2: 0 },
+            "RECONSIDERAÇÃO DE PARECER/PROCESSO (CLA)": { total: 4, concluidos: 1, andamento: 3, crescimento: Infinity, tri1: 0, tri2: 1 },
+            "LICENÇA AMBIENTAL DE OPERAÇÃO (LAO)": { total: 3, concluidos: 2, andamento: 1, crescimento: -100, tri1: 2, tri2: 0 },
+            "ALVARÁ DE CONCLUSÃO DE OBRAS (INFRAESTRUTURA)": { total: 3, concluidos: 0, andamento: 3, crescimento: 0, tri1: 0, tri2: 0 },
+            "AUTORIZAÇÃO": { total: 3, concluidos: 2, andamento: 1, crescimento: Infinity, tri1: 0, tri2: 2 },
+            "TRANSFERÊNCIA DA TITULARIDADE": { total: 3, concluidos: 1, andamento: 2, crescimento: -100, tri1: 1, tri2: 0 },
+            "ALTERAÇÃO DE RAZÃO SOCIAL": { total: 2, concluidos: 1, andamento: 1, crescimento: Infinity, tri1: 0, tri2: 1 },
+            "AUTORIZAÇÃO PARA LIBERAÇÃO DE LOTES/UNIDADES CAUCIONADAS": { total: 2, concluidos: 2, andamento: 0, crescimento: Infinity, tri1: 0, tri2: 2 },
+            "RECONSIDERAÇÃO DE PARECER/PROCESSO (GELAP)": { total: 2, concluidos: 2, andamento: 0, crescimento: 0, tri1: 1, tri2: 1 },
+            "TRANSFERÊNCIA DE TITULARIDADE DE ALVARÁ": { total: 2, concluidos: 1, andamento: 1, crescimento: -100, tri1: 1, tri2: 0 },
+            "LICENÇA ESPECÍFICA PARA EXPLORAÇÃO DE SUBSTÂNCIAS MINERAIS": { total: 2, concluidos: 0, andamento: 2, crescimento: 0, tri1: 0, tri2: 0 },
+            "AUTORIZAÇÃO PARA IMPLANTAÇÃO DE GALHARDETE, ESTANDARTE, SIMILARES E MURO": { total: 1, concluidos: 0, andamento: 1, crescimento: null, tri1: 0, tri2: 0 },
+            "BAIXA DE LICENÇA AMBIENTAL": { total: 1, concluidos: 0, andamento: 1, crescimento: null, tri1: 0, tri2: 0 },
+            "LICENÇA AMBIENTAL DE IMPLANTAÇÃO (LAI)": { total: 1, concluidos: 0, andamento: 1, crescimento: null, tri1: 0, tri2: 0 },
+            "LICENÇA AMBIENTAL PRÉVIA (LAP)": { total: 1, concluidos: 1, andamento: 0, crescimento: null, tri1: 0, tri2: 1 },
+            "LOTEAMENTO DE INTERESSE SOCIAL": { total: 1, concluidos: 0, andamento: 1, crescimento: null, tri1: 0, tri2: 0 },
+            "PRORROGAÇÃO DE LICENÇA/AUTORIZAÇÃO": { total: 1, concluidos: 1, andamento: 0, crescimento: null, tri1: 0, tri2: 1 }
+        };
+
+        const select = document.getElementById('assunto-select');
+        const initialMessageDiv = document.getElementById('initial-message');
+        const detailsWrapper = document.getElementById('assunto-detalhes-wrapper');
+        let doughnutChartInstance = null;
+        let barChartInstance = null;
+        
+        const sortedKeys = Object.keys(dadosAssuntos).sort((a, b) => dadosAssuntos[b].total - dadosAssuntos[a].total);
+        select.innerHTML = '<option value="">-- Selecione um assunto --</option>' + 
+                            sortedKeys.map(key => `<option value="${key}">${key} (${dadosAssuntos[key].total})</option>`).join('');
+
+        select.addEventListener('change', (event) => {
+            const selectedKey = event.target.value;
+            if (selectedKey) {
+                updateDetails(selectedKey);
+            } else {
+                 initialMessageDiv.classList.remove('hidden');
+                 detailsWrapper.classList.add('hidden');
+            }
+        });
+
+        function updateDetails(key) {
+            const data = dadosAssuntos[key];
+            initialMessageDiv.classList.add('hidden');
+            detailsWrapper.classList.remove('hidden');
+
+            // Populate details
+            document.getElementById('assunto-titulo').innerText = key;
+            document.getElementById('detalhe-volume').innerText = data.total;
+            const taxaConclusao = data.total > 0 ? ((data.concluidos / data.total) * 100).toFixed(1) : 0;
+            document.getElementById('detalhe-taxa').innerText = `${taxaConclusao}%`;
+            
+            let crescimentoHtml = '';
+            if (data.crescimento !== null && isFinite(data.crescimento)) {
+                const crescimento = data.crescimento;
+                const colorClass = crescimento > 0 ? 'text-green-600' : (crescimento < 0 ? 'text-red-600' : 'text-gray-500');
+                const symbol = crescimento > 0 ? `+${crescimento.toFixed(1)}` : crescimento.toFixed(1);
+                crescimentoHtml = `<p class="text-4xl font-bold ${colorClass}">${symbol}%</p>`;
+            } else if (!isFinite(data.crescimento)){
+                 crescimentoHtml = `<p class="text-4xl font-bold text-green-600">▲</p>`;
+            } else {
+                crescimentoHtml = `<p class="text-4xl font-bold text-gray-500">N/A</p>`;
+            }
+            document.getElementById('detalhe-crescimento').innerHTML = crescimentoHtml;
+            
+            // Generate Diagnóstico
+            let diagnosticoTexto, diagnosticoBg, diagnosticoIcon, diagnosticoTitle;
+            const taxaNum = parseFloat(taxaConclusao);
+
+            if (key === "PROCESSO FISCAL") {
+                diagnosticoTitle = "Gargalo Crítico da SEDUR";
+                diagnosticoTexto = "Com volume imenso e conclusão quase nula, este é o ponto mais crítico da secretaria, exigindo intervenção estratégica e urgente.";
+                diagnosticoBg = 'bg-red-100 text-red-800';
+                diagnosticoIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.21 3.03-1.742 3.03H4.42c-1.532 0-2.492-1.696-1.742-3.03l5.58-9.92zM10 13a1 1 0 110-2 1 1 0 010 2zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>`;
+            } else if (taxaNum >= 75) {
+                diagnosticoTitle = "Excelente Performance";
+                diagnosticoTexto = "Este processo demonstra alta eficiência, com a maioria dos casos sendo concluída. Pode servir de modelo para outras áreas.";
+                diagnosticoBg = 'bg-green-100 text-green-800';
+                diagnosticoIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>`;
+            } else if (taxaNum < 20 && data.total > 20) {
+                 diagnosticoTitle = "Atenção Crítica";
+                 diagnosticoTexto = "Este assunto apresenta um volume considerável, mas uma taxa de conclusão muito baixa, indicando um possível gargalo operacional.";
+                 diagnosticoBg = 'bg-red-100 text-red-800';
+                 diagnosticoIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.21 3.03-1.742 3.03H4.42c-1.532 0-2.492-1.696-1.742-3.03l5.58-9.92zM10 13a1 1 0 110-2 1 1 0 010 2zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>`;
+            } else if (taxaNum < 50) {
+                diagnosticoTitle = "Ponto de Melhoria";
+                diagnosticoTexto = "A taxa de conclusão está abaixo do ideal. Recomenda-se analisar o fluxo de trabalho para identificar oportunidades de otimização.";
+                diagnosticoBg = 'bg-amber-100 text-amber-800';
+                diagnosticoIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 00-6 6c0 1.887.842 3.553 2.163 4.691L4 17h12l-2.163-4.309A5.967 5.967 0 0016 8a6 6 0 00-6-6zM8.5 6a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zM10 14a1 1 0 100-2 1 1 0 000 2z" /></svg>`;
+            } else {
+                diagnosticoTitle = "Desempenho Equilibrado";
+                diagnosticoTexto = "O processo apresenta uma performance moderada. Ações de melhoria contínua podem elevar a eficiência geral.";
+                diagnosticoBg = 'bg-blue-100 text-blue-800';
+                diagnosticoIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>`;
+            }
+
+            const diagnosticoDiv = document.getElementById('diagnostico');
+            diagnosticoDiv.className = `p-4 rounded-lg ${diagnosticoBg}`;
+            document.getElementById('diagnostico-titulo').innerHTML = `${diagnosticoIcon} ${diagnosticoTitle}`;
+            document.getElementById('diagnostico-texto').innerText = diagnosticoTexto;
+
+            // Update Doughnut Chart
+            const doughnutCtx = document.getElementById('assunto-chart').getContext('2d');
+            if (doughnutChartInstance) doughnutChartInstance.destroy();
+            doughnutChartInstance = new Chart(doughnutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: [`Concluídos (${data.concluidos})`, `Em Andamento (${data.andamento})`],
+                    datasets: [{
+                        data: [data.concluidos, data.andamento],
+                        backgroundColor: ['#10b981', '#f59e0b'],
+                        borderColor: '#ffffff',
+                        borderWidth: 4, hoverBorderWidth: 6,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, cutout: '65%',
+                    plugins: { legend: { display: false }, tooltip: { backgroundColor: '#334155', titleFont: { size: 14 }, bodyFont: { size: 12 }, padding: 10, cornerRadius: 4, displayColors: false, callbacks: { label: (context) => ` ${context.parsed.toLocaleString('pt-BR')} processos` } } }
+                }
+            });
+
+            // Update Bar Chart (Trimestre)
+            const barCtx = document.getElementById('trimestre-chart').getContext('2d');
+            if(barChartInstance) barChartInstance.destroy();
+            barChartInstance = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['1º Trimestre', '2º Trimestre'],
+                    datasets: [{
+                        label: 'Processos Concluídos',
+                        data: [data.tri1, data.tri2],
+                        backgroundColor: ['#a78bfa', '#8b5cf6'],
+                        borderColor: ['#8b5cf6', '#7c3aed'],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { backgroundColor: '#334155', titleFont: { size: 14 }, bodyFont: { size: 12 }, padding: 10, cornerRadius: 4, displayColors: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#6b7280', font: {size: 12} },
+                             grid: { color: '#e5e7eb' }
+                        },
+                        x: {
+                            ticks: { color: '#4b5563', font: {size: 14, weight: '500'} },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>
